@@ -1,3 +1,4 @@
+const { where } = require('sequelize/types');
 const {sequelize} = require('./db');
 const {Band, Musician} = require('./index')
 
@@ -14,11 +15,15 @@ describe('Band and Musician Models', () => {
 
     test('can create a Band', async () => {
         // TODO - test creating a band
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const newBand = await Band.create({name: 'Joe', genre: 'Rock'});
+        expect(newBand.name).toBe('Joe');
+        expect(newBand.genre).toBe('Rock');
     })
 
     test('can create a Musician', async () => {
         // TODO - test creating a musician
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        const newMusician = await Musician.create({name: 'Joe', instrument: 'Guitar'});
+        expect(newMusician.name).toBe('Joe');
+        expect(newMusician.instrument).toBe('Guitar');
     })
 })
