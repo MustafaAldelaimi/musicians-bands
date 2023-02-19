@@ -71,4 +71,24 @@ describe('Band and Musician Models', () => {
         expect(bands[1].name).toBe('Queen');
     })
 
+    test('eager loading works', async () => {
+        const band_eager = await Band.findAll({
+            include: [
+                {
+                    model: Musician,
+                    as: 'musicians',
+                },
+                {
+                    model: Song,
+                    as:'songs',
+                }
+            ]
+        })
+        console.log(band_eager);
+        const musician_eager = band_eager[0].musicians[0].name
+        const song_eager = band_eager[0].songs[0].title
+        expect(musician_eager).toBe('Bob');
+        expect(song_eager).toBe('Bohemian Rhapsody');
+    })
+
 });
